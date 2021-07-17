@@ -30,7 +30,7 @@ wso2:
   deployment:
     dependencies:
       # The configuration should be set to be 'true' if a MySQL database should be spawned as a pod within the cluster
-      mysql: true
+      mysql: false
       # Enable NFS dynamic provisioner for Kubernetes
       nfsServerProvisioner: true
 
@@ -60,8 +60,9 @@ wso2:
       # dockerRegistry: ""
       imageName: "wso2am"
       imageTag: "4.0.0"
+      image: "wso2am:4.0.0"
       # Refer to the Kubernetes documentation on updating images (https://kubernetes.io/docs/concepts/containers/images/#updating-images)
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
 
       # Indicates whether the container is running
       livenessProbe:

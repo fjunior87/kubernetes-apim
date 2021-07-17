@@ -42,6 +42,7 @@ data:
     [user_store]
     type = "database_unique_id"
 
+    {{ if .Values.wso2.deployment.dependencies.mysql }}
     [database.apim_db]
     type = "mysql"
     url = "jdbc:mysql://wso2am-mysql-db-service:3306/WSO2AM_DB?useSSL=false&amp;autoReconnect=true&amp;requireSSL=false&amp;verifyServerCertificate=false"
@@ -55,6 +56,7 @@ data:
     username = "wso2carbon"
     password = "wso2carbon"
     driver = "com.mysql.cj.jdbc.Driver"
+    {{end}}
 
     [keystore.tls]
     file_name =  "wso2carbon.jks"

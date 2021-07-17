@@ -20,7 +20,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: Recreate
+    type: Rolling
   selector:
     matchLabels:
       deployment: {{ template "am-single-node.resource.prefix" . }}-am
@@ -53,7 +53,7 @@ spec:
         {{ end }}
       containers:
         - name: wso2am
-{{- include "image" (dict "Values" .Values "deployment" .Values.wso2.deployment.am) | indent 10 }}
+          image: {{.Values.wso2.deployment.am.image}}
           imagePullPolicy: {{ .Values.wso2.deployment.am.imagePullPolicy }}
           livenessProbe:
             exec:
