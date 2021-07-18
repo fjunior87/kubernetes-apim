@@ -20,7 +20,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: Rolling
+    type: RollingUpdate
   selector:
     matchLabels:
       deployment: {{ template "am-single-node.resource.prefix" . }}-am
