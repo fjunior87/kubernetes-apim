@@ -29,6 +29,10 @@ spec:
     metadata:
       annotations:
         checksum.am.conf: {{ include (print $.Template.BasePath "/am/instance/wso2am-single-node-am-conf.yaml") . | sha256sum }}
+        prometheus.io.wso2/scrape: "true"
+        prometheus.io.wso2/port: "9201"
+        prometheus.io.wso2/path: /metric-service/metrics
+        fluentbit.io/parser: wso2
       labels:
         deployment: {{ template "am-single-node.resource.prefix" . }}-am
         node: {{ template "am-single-node.resource.prefix" . }}-am
@@ -106,6 +110,8 @@ spec:
                   fieldPath: status.podIP
             - name: JVM_MEM_OPTS
               value: "-Xms{{ .Values.wso2.deployment.am.resources.jvm.heap.memory.xms }} -Xmx{{ .Values.wso2.deployment.am.resources.jvm.heap.memory.xmx }}"
+            - name: JAVA_OPTS
+              value: "-DenablePrometheusApi=true"
           volumeMounts:
             - name: wso2am-conf
               mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
